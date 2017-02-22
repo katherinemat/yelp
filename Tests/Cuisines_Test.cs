@@ -79,6 +79,27 @@ namespace Yelp
       Assert.Equal(testCuisine, foundCuisine);
     }
 
+    [Fact]
+    public void GetRestaurant_TwoRestaurantsSameClass_RetrievedRestaurants()
+    {
+      //Arrange
+      Cuisine testCuisine = new Cuisine("western");
+      testCuisine.Save();
+
+      DateTime testDate = new DateTime(2016,4,30);
+      Restaurant firstRestaurant = new Restaurant("Wendys","nuggets",testDate,testCuisine.GetId());
+      firstRestaurant.Save();
+
+      Restaurant secondRestaurant = new Restaurant("McDonalds","Big Mac",testDate,testCuisine.GetId());
+      secondRestaurant.Save();
+
+      //Act
+      List<Restaurant> output = testCuisine.GetRestaurant();
+      List<Restaurant> verify = new List<Restaurant>{firstRestaurant,secondRestaurant};
+
+      //Assert
+      Assert.Equal(output,verify);
+    }
     public void Dispose()
     {
       Cuisine.ClearAll();
