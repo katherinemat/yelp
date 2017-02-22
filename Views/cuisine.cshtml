@@ -1,0 +1,27 @@
+@{
+    Layout="Shared/_Layout.cshtml";
+}
+
+<h3>All the restaurants in @Model["cuisine"].GetName():</h3>
+
+@if (@Model["restaurants"].Count == 0)
+{
+  <h4> No restaurants for this type of cuisine has been added </h4>
+}
+else
+{
+<ol>@foreach (var restaurant in @Model["restaurants"])
+{
+  <li>@restaurant.GetName()</li>
+    <ul>
+      <li>@restaurant.GetDate().ToShortDateString()</li> <li>@restaurant.GetFavDish()</li>
+    </ul>
+}
+</ol>
+}
+
+<div class="row">
+  <a href="/restaurants">See all restaurants</a><br>
+  <a href="/cuisines">See all cuisines</a><br>
+  <a href="/">Home Page</a>
+</div>

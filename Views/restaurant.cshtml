@@ -1,0 +1,17 @@
+@{
+    Layout="Shared/_Layout.cshtml";
+}
+
+<h3>Information for @Model["restaurant"].GetName():</h3>
+
+<ul>
+  <li>@Model["restaurant"].GetDate()</li>
+  <li>@Model["restaurant"].GetFavDish()</li>
+  <li>@Model["cuisine"].GetName()</li>
+</ul>
+
+<div class="row">
+  <a href="/restaurants">See all restaurants</a><br>
+  <a href="/cuisines">See all cuisines</a><br>
+  <a href="/">Home Page</a>
+</div>

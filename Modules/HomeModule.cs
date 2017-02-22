@@ -37,6 +37,22 @@ namespace Yelp
         List<Restaurant> allRestaurants = Restaurant.GetAll();
         return View["restaurants.cshtml", allRestaurants];
       };
+      Get["/cuisines/{id}"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        var foundCuisine = Cuisine.Find(parameters.id);
+        var foundRestaurants = foundCuisine.GetRestaurant();
+        model.Add("cuisine",foundCuisine);
+        model.Add("restaurants",foundRestaurants);
+        return View["cuisine.cshtml", model];
+      };
+      Get["/restaurants/{id}"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        var foundRestaurant = Restaurant.Find(parameters.id);
+        var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
+        model.Add("cuisine",foundCuisine);
+        model.Add("restaurant",foundRestaurant);
+        return View["restaurant.cshtml", model];
+      };
     }
   }
 }
