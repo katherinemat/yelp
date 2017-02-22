@@ -102,7 +102,7 @@ namespace Yelp
     }
     public void Dispose()
     {
-      Cuisine.ClearAll();
+      Cuisine.DeleteAll();
       Restaurant.DeleteAll();
     }
   }

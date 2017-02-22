@@ -53,6 +53,16 @@ namespace Yelp
         model.Add("restaurant",foundRestaurant);
         return View["restaurant.cshtml", model];
       };
+      Post["/cuisines/deleted"] = _ => {
+        Cuisine.DeleteAll();
+        List<Cuisine> allCuisines = Cuisine.GetAll();
+        return View["cuisines.cshtml", allCuisines];
+      };
+      Post["/restaurants/deleted"] = _ => {
+        Restaurant.DeleteAll();
+        List<Restaurant> allRestaurants = Restaurant.GetAll();
+        return View["restaurants.cshtml", allRestaurants];
+      };
     }
   }
 }
