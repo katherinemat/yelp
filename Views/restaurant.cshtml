@@ -10,6 +10,10 @@
   <li>@Model["cuisine"].GetName()</li>
 </ul>
 
+<form action="/restaurant/@Model["restaurant"].GetId()/deleted" method="post">
+  <button type="submit" name="button" class="btn btn-lg btn-info">Delete this Restaurant</button>
+</form>
+
 <div class="row">
   <a href="/restaurants">See all restaurants</a><br>
   <a href="/cuisines">See all cuisines</a><br>

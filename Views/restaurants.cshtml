@@ -14,7 +14,7 @@
     <ol>
     @foreach (var restaurant in @Model["restaurantList"])
     {
-      <li><a href="/restaurants/@restaurant.GetId()"> @restaurant.GetName(), @restaurant.GetDate().ToShortDateString(), @restaurant.GetFavDish() </a></li>
+      <li><a href="/restaurants/@restaurant.GetId()"> @restaurant.GetName()</a></li>
     }
     </ol>
   }
