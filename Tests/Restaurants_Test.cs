@@ -34,7 +34,7 @@ namespace Yelp
     }
 
     [Fact]
-    public void Test_Save_SavesToDatabase()
+    public void Save_OneInstanceofRestaurants_SavesToDatabase()
     {
       //Arrange
       DateTime testDate = new DateTime(1999,6,4);
@@ -50,7 +50,7 @@ namespace Yelp
     }
 
     [Fact]
-    public void Test_Save_AssignIdToObject()
+    public void SaveGetAll_OneInstanceofRestaurants_AssignIdToInstance()
     {
       //Arrange
       DateTime testDate = new DateTime(1999,6,4);
@@ -65,6 +65,21 @@ namespace Yelp
 
       //Assert
       Assert.Equal(testId, result);
+    }
+
+    [Fact]
+    public void Find_RestaurantInDatabase_ReturnCorrectIdRestaurant()
+    {
+      //Arrange
+      DateTime testDate = new DateTime(1999,6,4);
+      Restaurant testRestaurant = new Restaurant("Wendys","nuggets",testDate,1);
+      testRestaurant.Save();
+
+      //Act
+      Restaurant foundRestaurant = Restaurant.Find(testRestaurant.GetId());
+
+      //Assert
+      Assert.Equal (testRestaurant,foundRestaurant);
     }
 
     public void Dispose()

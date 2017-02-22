@@ -158,6 +158,48 @@ namespace Yelp
       }
     }
 
+    public static Restaurant Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM restaurants WHERE id = @RestaurantId;", conn);
+
+      SqlParameter idParameter = new SqlParameter();
+      idParameter.ParameterName = "@RestaurantId";
+      idParameter.Value = id.ToString();
+      cmd.Parameters.Add(idParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundId = 0;
+      string foundName = null;
+      string foundDish = null;
+      DateTime foundDate = new DateTime();
+      int foundCuisineId = 0;
+
+      while (rdr.Read())
+      {
+        foundId = rdr.GetInt32(0);
+        foundName = rdr.GetString(1);
+        foundDish = rdr.GetString(2);
+        foundDate = rdr.GetDateTime(3);
+        foundCuisineId = rdr.GetInt32(4);
+      }
+
+      Restaurant foundRestaurant = new Restaurant(foundName,foundDish,foundDate,foundCuisineId, foundId);
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+
+      return foundRestaurant;
+    }
+
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
