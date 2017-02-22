@@ -18,3 +18,12 @@ GO
 - cusine select box, 5 options
 - restaurant name input field
 - submit button
+
+
+TODO
+__ add more specs
+__ add the pricerange thing, add one column in the cuisine
+__ add Review, add one column in restaurants
+__ Wireframing for Layout
+__ JS effect
+__ Delete Category and Restaurant individually

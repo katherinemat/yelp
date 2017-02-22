@@ -1,0 +1,37 @@
+@{
+    Layout="Shared/_Layout.cshtml";
+}
+<h1 class="jumbotron">Restaurant Bookmarks</h1>
+
+<div class="well">
+  <h2>All Cuisine Groups:</h2>
+  @if(@Model.Count== 0)
+  {
+    <h5> Your cuisine list is empty </h5>
+  }
+  else
+  {
+    <ol>
+    @foreach (var cuisine in @Model)
+    {
+      <li><a href="/cuisines/@cuisine.GetId()"> @cuisine.GetName() </a></li>
+    }
+    </ol>
+  }
+</div>
+
+<div class="panel panel-success">
+  <div class="panel-heading">Add a new cuisine group</div>
+  <div class="panel-body">
+    <form action="/cuisines/new" method="post">
+      <label for="cuisine">Cuisine Type:</label>
+      <input type="text" name="cuisine" id="cuisine">
+  </div>
+</div>
+<button type="submit" name="button" class="btn btn-lg btn-info">Submit</button>
+</form>
+
+<div class="row">
+  <a href="/restaurants">See all restaurants</a><br>
+  <a href="/">Home Page</a>
+</div>
