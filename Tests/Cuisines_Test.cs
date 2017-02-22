@@ -118,6 +118,29 @@ namespace Yelp
       Assert.Equal(outputList,verifyList);
     }
 
+    [Fact]
+    public void DeleteRestaurantInCuisine_OneCuisine_CuisineEmpty()
+    {//Arrange
+      Cuisine testCuisine = new Cuisine("Western");
+      testCuisine.Save();
+
+      DateTime testDate = new DateTime(2016,4,30);
+      Restaurant firstRestaurant = new Restaurant("Wendys","nuggets",testDate,testCuisine.GetId());
+      firstRestaurant.Save();
+
+      Restaurant secondRestaurant = new Restaurant("McDonalds","Big Mac",testDate,testCuisine.GetId());
+      secondRestaurant.Save();
+
+      testCuisine.DeleteRestaurantInCuisine();
+      List<Restaurant> outputList = testCuisine.GetRestaurant();
+
+      //Act
+      List<Restaurant> verifyList = new List<Restaurant>{};
+
+      //Assert
+      Assert.Equal(outputList, verifyList);
+    }
+
     public void Dispose()
     {
       Cuisine.DeleteAll();
