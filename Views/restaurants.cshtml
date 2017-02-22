@@ -1,0 +1,45 @@
+@{
+    Layout="Shared/_Layout.cshtml";
+}
+<h1 class="jumbotron">Restaurants</h1>
+
+<div class="well">
+  <h2>All Restaurant Groups:</h2>
+  @if(@Model.Count== 0)
+  {
+    <h5> Your restaurant list is empty </h5>
+  }
+  else
+  {
+    <ol>
+    @foreach (var restaurant in @Model)
+    {
+      <li><a href="/restaurants/@restaurant.GetId()"> @restaurant.GetName(), @restaurant.GetDate().ToShortDateString(), @restaurant.GetFavDish() </a></li>
+    }
+    </ol>
+  }
+</div>
+
+<div class="panel panel-success">
+  <div class="panel-heading">Add a new restaurant</div>
+  <div class="panel-body">
+    <form action="/restaurants/new" method="post">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name">
+
+      <label for="start-date">Start Date:</label>
+      <input type="date" name="start-date" id="start-date">
+
+      <label for="fav-dish">Favorite Dish:</label>
+      <input type="text" name="fav-dish" id="fav-dish">
+
+      @* add form input for type of cuisine with options *@
+  </div>
+</div>
+<button type="submit" name="button" class="btn btn-lg btn-info">Submit</button>
+</form>
+
+<div class="row">
+  <a href="/cuisines">See all cuisines</a><br>
+  <a href="/">Home Page</a>
+</div>
