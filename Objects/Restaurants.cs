@@ -55,7 +55,7 @@ namespace Yelp
 
     public string GetFavDish()
     {
-      return _FavDish;
+      return _favDish;
     }
     public void SetFavDish(string newFavDish)
     {
@@ -66,7 +66,7 @@ namespace Yelp
     {
       return _date;
     }
-    public void SetDate(string newDate)
+    public void SetDate(DateTime newDate)
     {
       _date = newDate;
     }
@@ -75,7 +75,7 @@ namespace Yelp
     {
       return _cuisineId;
     }
-    public void SetCuisineId(string newCuisineId)
+    public void SetCuisineId(int newCuisineId)
     {
       _cuisineId = newCuisineId;
     }
@@ -117,7 +117,7 @@ namespace Yelp
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("DELETE FROM tasks;", conn);
+      SqlCommand cmd = new SqlCommand("DELETE FROM restaurants;", conn);
       cmd.ExecuteNonQuery();
     }
 
