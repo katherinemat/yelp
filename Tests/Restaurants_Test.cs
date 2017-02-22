@@ -49,6 +49,24 @@ namespace Yelp
       Assert.Equal(testList, result);
     }
 
+    [Fact]
+    public void Test_Save_AssignIdToObject()
+    {
+      //Arrange
+      DateTime testDate = new DateTime(1999,6,4);
+      Restaurant testRestaurant = new Restaurant("Wendys","nuggets",testDate,1);
+
+      //Act
+      testRestaurant.Save();
+      Restaurant savedRestaurant = Restaurant.GetAll()[0];
+
+      int result = savedRestaurant.GetId();
+      int testId = testRestaurant.GetId();
+
+      //Assert
+      Assert.Equal(testId, result);
+    }
+
     public void Dispose()
     {
       Restaurant.DeleteAll();
