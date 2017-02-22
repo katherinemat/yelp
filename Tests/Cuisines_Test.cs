@@ -100,6 +100,24 @@ namespace Yelp
       //Assert
       Assert.Equal(output,verify);
     }
+
+    [Fact]
+    public void DeleteThisCuisine_OneCuisine_CuisineDeleted()
+    {//Arrange
+      Cuisine firstCuisine = new Cuisine("japonese");
+      firstCuisine.Save();
+      Cuisine secondCuisine = new Cuisine("chinese");
+      secondCuisine.Save();
+      firstCuisine.DeleteThisCuisine();
+      List<Cuisine> outputList = Cuisine.GetAll();
+
+      //Act
+      List<Cuisine> verifyList = new List<Cuisine>{secondCuisine};
+
+      //Assert
+      Assert.Equal(outputList,verifyList);
+    }
+
     public void Dispose()
     {
       Cuisine.DeleteAll();
