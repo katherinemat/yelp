@@ -23,19 +23,30 @@ namespace Yelp
         return View["cuisines.cshtml", allCuisines];
       };
       Get["/restaurants"] = _ =>{
-        List<Restaurant> allRestaurants = Restaurant.GetAll();
-        return View["restaurants.cshtml", allRestaurants];
+        var allCuisines = Cuisine.GetAll();
+        var allRestaurants = Restaurant.GetAll();
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        model.Add("cuisineList", allCuisines);
+        model.Add("restaurantList", allRestaurants);
+        return View["restaurants.cshtml", model];
       };
       Post["/restaurants/new"] = _ =>{
+        // Create new instance
         string newName = Request.Form["name"];
         string newFavDish = Request.Form["fav-dish"];
         DateTime newDate = Request.Form["start-date"];
+        int newCuisineId = Request.Form["cuisine-id"];
 
-        Restaurant newRestaurant = new Restaurant(newName, newFavDish, newDate, 1);
+        var newRestaurant = new Restaurant(newName, newFavDish, newDate, newCuisineId);
         newRestaurant.Save();
 
-        List<Restaurant> allRestaurants = Restaurant.GetAll();
-        return View["restaurants.cshtml", allRestaurants];
+        //List out all instances
+        var allCuisines = Cuisine.GetAll();
+        var allRestaurants = Restaurant.GetAll();
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        model.Add("cuisineList", allCuisines);
+        model.Add("restaurantList", allRestaurants);
+        return View["restaurants.cshtml", model];
       };
       Get["/cuisines/{id}"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>{};
@@ -60,8 +71,27 @@ namespace Yelp
       };
       Post["/restaurants/deleted"] = _ => {
         Restaurant.DeleteAll();
-        List<Restaurant> allRestaurants = Restaurant.GetAll();
-        return View["restaurants.cshtml", allRestaurants];
+        var allCuisines = Cuisine.GetAll();
+        var allRestaurants = Restaurant.GetAll();
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        model.Add("cuisineList", allCuisines);
+        model.Add("restaurantList", allRestaurants);
+        return View["restaurants.cshtml", model];
+      };
+      Post["/cuisine/{id}/cleared"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        var foundCuisine = Cuisine.Find(parameters.id);
+        foundCuisine.DeleteRestaurantInCuisine();
+        var foundRestaurants = foundCuisine.GetRestaurant();
+        model.Add("cuisine",foundCuisine);
+        model.Add("restaurants",foundRestaurants);
+        return View["cuisine.cshtml", model];
+      };
+      Post["/cuisine/{id}/deleted"] = parameters => {
+        Cuisine foundCuisine = Cuisine.Find(parameters.id);
+        foundCuisine.DeleteThisCuisine();
+        List<Cuisine> allCuisines = Cuisine.GetAll();
+        return View["cuisines.cshtml", allCuisines];
       };
     }
   }
