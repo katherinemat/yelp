@@ -209,5 +209,18 @@ namespace Yelp
       cmd.ExecuteNonQuery();
     }
 
+    public void DeleteThisRestaurant()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM restaurants WHERE id = @RestaurantId;", conn);
+      SqlParameter idParameter = new SqlParameter();
+      idParameter.ParameterName = "@RestaurantId";
+      idParameter.Value = this.GetId().ToString();
+      cmd.Parameters.Add(idParameter);
+      cmd.ExecuteNonQuery();
+    }
+
   }
 }
