@@ -1,0 +1,20 @@
+CREATE TABLE cuisines (
+  id int IDENTITY (1, 1) ,
+  name varchar(255)  ,
+)
+GO
+
+CREATE TABLE restaurants (
+  id int IDENTITY (1, 1) ,
+  name varchar(255) ,
+  fav_dish varchar(255) ,
+  opening_date datetime ,
+  cuisine_id int ,
+)
+GO
+
+
+- input their cuisine category
+- cusine select box, 5 options
+- restaurant name input field
+- submit button
