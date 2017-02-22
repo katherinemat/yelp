@@ -22,9 +22,18 @@ namespace Yelp
 
       //Assert
       Assert.Equal(firstCuisine, secondCuisine);
-
     }
-    
+
+    [Fact]
+    public void GetAll_DatabaseEmptyAtFirst_NoCuisines()
+    {
+      //Arrange,Act
+      int result = Cuisine.GetAll().Count;
+
+      //Assert
+      Assert.Equal(0, result);
+    }
+
     public void Dispose()
     {
       Restaurant.DeleteAll();

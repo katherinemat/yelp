@@ -44,38 +44,35 @@ namespace Yelp
       _name = newName;
     }
 
-    // public static List<Cuisine> GetAll()
-    //  {
-    //    List<Cuisine> allRestaurants = new List<Restaurant>{};
-    //
-    //    SqlConnection conn = DB.Connection();
-    //    conn.Open();
-    //
-    //    SqlCommand cmd = new SqlCommand("SELECT * FROM restaurants ORDER BY cast([opening_date] as datetime) asc;", conn);
-    //    SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //    while(rdr.Read())
-    //    {
-    //      int restaurantId = rdr.GetInt32(0);
-    //      string restaurantName = rdr.GetString(1);
-    //      string favDish = rdr.GetString(2);
-    //      DateTime openingDate = rdr.GetDateTime(3);
-    //      int cuisineId = rdr.GetInt32(4);
-    //      Restaurant newRestaurant = new Restaurant(restaurantName, favDish, openingDate, cuisineId, restaurantId);
-    //      allRestaurants.Add(newRestaurant);
-    //    }
-    //
-    //    if (rdr != null)
-    //    {
-    //      rdr.Close();
-    //    }
-    //    if (conn != null)
-    //    {
-    //      conn.Close();
-    //    }
-    //
-    //    return allRestaurants;
-    //  }
+    public static List<Cuisine> GetAll()
+     {
+       List<Cuisine> allCuisines = new List<Cuisine>{};
+
+       SqlConnection conn = DB.Connection();
+       conn.Open();
+
+       SqlCommand cmd = new SqlCommand("SELECT * FROM cuisines;", conn);
+       SqlDataReader rdr = cmd.ExecuteReader();
+
+       while(rdr.Read())
+       {
+         int cuisineId = rdr.GetInt32(0);
+         string cuisineName = rdr.GetString(1);
+         Cuisine newCuisine = new Cuisine(cuisineName, cuisineId);
+         allCuisines.Add(newCuisine);
+       }
+
+       if (rdr != null)
+       {
+         rdr.Close();
+       }
+       if (conn != null)
+       {
+         conn.Close();
+       }
+
+       return allCuisines;
+     }
     //
     // public void Save()
     // {
