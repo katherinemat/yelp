@@ -80,37 +80,83 @@ namespace Yelp
       _cuisineId = newCuisineId;
     }
 
-    // public static List<Restaurant> GetAll()
-    //  {
-    //    List<Restaurant> allRestaurants = new List<Restaurant>{};
-    //
-    //    SqlConnection conn = DB.Connection();
-    //    conn.Open();
-    //
-    //    SqlCommand cmd = new SqlCommand("SELECT * FROM tasks ORDER BY cast([date] as datetime) asc;", conn);
-    //    SqlDataReader rdr = cmd.ExecuteReader();
-    //
-    //    while(rdr.Read())
-    //    {
-    //      int taskId = rdr.GetInt32(0);
-    //      string taskName = rdr.GetString(1);
-    //      int FavDish = rdr.GetInt32(2);
-    //      DateTime taskDate = rdr.GetDateTime(3);
-    //      Restaurant newRestaurant = new Restaurant(taskName, FavDish, taskDate, taskId);
-    //      allRestaurants.Add(newRestaurant);
-    //    }
-    //
-    //    if (rdr != null)
-    //    {
-    //      rdr.Close();
-    //    }
-    //    if (conn != null)
-    //    {
-    //      conn.Close();
-    //    }
-    //
-    //    return allRestaurants;
-    //  }
+    public static List<Restaurant> GetAll()
+     {
+       List<Restaurant> allRestaurants = new List<Restaurant>{};
+
+       SqlConnection conn = DB.Connection();
+       conn.Open();
+
+       SqlCommand cmd = new SqlCommand("SELECT * FROM restaurants ORDER BY cast([opening_date] as datetime) asc;", conn);
+       SqlDataReader rdr = cmd.ExecuteReader();
+
+       while(rdr.Read())
+       {
+         int restaurantId = rdr.GetInt32(0);
+         string restaurantName = rdr.GetString(1);
+         string favDish = rdr.GetString(2);
+         DateTime openingDate = rdr.GetDateTime(3);
+         int cuisineId = rdr.GetInt32(4);
+         Restaurant newRestaurant = new Restaurant(restaurantName, favDish, openingDate, cuisineId, restaurantId);
+         allRestaurants.Add(newRestaurant);
+       }
+
+       if (rdr != null)
+       {
+         rdr.Close();
+       }
+       if (conn != null)
+       {
+         conn.Close();
+       }
+
+       return allRestaurants;
+     }
+
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO restaurants (name, fav_dish, opening_date, cuisine_id) OUTPUT INSERTED.id VALUES (@RestaurantName, @RestaurantFavDish, @RestaurantDate, @RestaurantCuisineId);", conn);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@RestaurantName";
+      nameParameter.Value = this.GetName();
+
+      SqlParameter favDishParameter = new SqlParameter();
+      favDishParameter.ParameterName = "@RestaurantFavDish";
+      favDishParameter.Value = this.GetFavDish();
+
+      SqlParameter dateParameter = new SqlParameter();
+      dateParameter.ParameterName = "@RestaurantDate";
+      dateParameter.Value = this.GetDate();
+
+      SqlParameter cuisineIdParameter = new SqlParameter();
+      cuisineIdParameter.ParameterName = "@RestaurantCuisineId";
+      cuisineIdParameter.Value = this.GetCuisineId();
+
+      cmd.Parameters.Add(nameParameter);
+      cmd.Parameters.Add(favDishParameter);
+      cmd.Parameters.Add(dateParameter);
+      cmd.Parameters.Add(cuisineIdParameter);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
 
     public static void DeleteAll()
     {

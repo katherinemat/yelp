@@ -23,6 +23,32 @@ namespace Yelp
       Assert.Equal(firstRestaurant,secondRestaurant);
     }
 
+    [Fact]
+    public void GetAll_DatabaseEmptyAtFirst_NoRestaurants()
+    {
+      //Arrange, Act
+      int output = Restaurant.GetAll().Count;
+
+      //Assert
+      Assert.Equal(0, output);
+    }
+
+    [Fact]
+    public void Test_Save_SavesToDatabase()
+    {
+      //Arrange
+      DateTime testDate = new DateTime(1999,6,4);
+      Restaurant testRestaurant = new Restaurant("Wendys","nuggets",testDate,1);
+      testRestaurant.Save();
+
+      //Act
+      List<Restaurant> result = Restaurant.GetAll();
+      List<Restaurant> testList = new List<Restaurant>{testRestaurant};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
+
     public void Dispose()
     {
       Restaurant.DeleteAll();
