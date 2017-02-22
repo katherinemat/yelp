@@ -34,8 +34,54 @@ namespace Yelp
       Assert.Equal(0, result);
     }
 
+    [Fact]
+    public void Save_OneInstanceofCusine_SavesToDatabase()
+    {
+      //Arrange
+      Cuisine testCuisine = new Cuisine("western");
+      testCuisine.Save();
+
+      //Act
+      List<Cuisine> output = Cuisine.GetAll();
+      List<Cuisine> verify = new List<Cuisine>{testCuisine};
+
+      //Assert
+      Assert.Equal(output,verify);
+    }
+
+    [Fact]
+    public void SaveGetAll_OneInstanceofCuisine_AssignIdToInstance()
+    {
+      //Arrange
+      Cuisine testCuisine = new Cuisine("western");
+      testCuisine.Save();
+      Cuisine savedCuisine = Cuisine.GetAll()[0];
+
+      //Act
+      int output = savedCuisine.GetId();
+      int verify = testCuisine.GetId();
+
+      //Assert
+      Assert.Equal(output,verify);
+    }
+
+    [Fact]
+    public void Find_CuisineClass_FoundCuisine()
+    {
+      //Arrange
+      Cuisine testCuisine = new Cuisine("western");
+      testCuisine.Save();
+
+      //Act
+      Cuisine foundCuisine = Cuisine.Find(testCuisine.GetId());
+
+      //Assert
+      Assert.Equal(testCuisine, foundCuisine);
+    }
+
     public void Dispose()
     {
+      Cuisine.ClearAll();
       Restaurant.DeleteAll();
     }
   }
