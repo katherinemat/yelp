@@ -145,6 +145,7 @@ namespace Yelp
 
       while(rdr.Read())
       {
+        //id is the only private property left to be assigned to the instance of the class
         this._id = rdr.GetInt32(0);
       }
 

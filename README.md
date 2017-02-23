@@ -69,6 +69,15 @@
 * Search for a cuisine type by exact name, disregarding capitalization, to view all the cuisine's restaurants
   * Input: Search "weSTern"
   * Output: "Lone Star", "Wendys", "Claim Jumper"
+* User can add a written review and rating for an individual restaurant
+  * Input: "Wendys", "very good....would come again", 5 stars
+  * Output: Submit
+* Individual restaurant pages display written review and rating
+  * Input: "Wendys"
+  * Output: "very good....would come again", 5 stars
+* Each restaurant displays its rating on all restaurant and cuisine pages
+  * Input: all restaurants page
+  * Output: "Wendys", "very good....would come again", 5 stars + "Burger King", "so freaking gross", 2 stars
 
 ## Known Bugs
 
