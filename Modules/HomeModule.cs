@@ -115,33 +115,12 @@ namespace Yelp
         model.Add("restaurants",foundRestaurants);
         return View["cuisine.cshtml", model];
       };
-      Patch["restaurant/editname/{id}"] = parameters => {
+      Patch["restaurant/edit/{id}"] = parameters => {
         Restaurant foundRestaurant = Restaurant.Find(parameters.id);
         foundRestaurant.UpdateName(Request.Form["restaurant-name"]);
-        Dictionary<string, object> model = new Dictionary<string, object>{};
-        var updatedRestaurant = Restaurant.Find(parameters.id);
-        var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
-        var allCuisines = Cuisine.GetAll();
-        model.Add("cuisines", allCuisines);
-        model.Add("cuisine", foundCuisine);
-        model.Add("restaurant", updatedRestaurant);
-        return View["restaurant.cshtml", model];
-      };
-      Patch["restaurant/editdate/{id}"] = parameters => {
-        Restaurant foundRestaurant = Restaurant.Find(parameters.id);
         foundRestaurant.UpdateDate(Request.Form["restaurant-date"]);
-        Dictionary<string, object> model = new Dictionary<string, object>{};
-        var updatedRestaurant = Restaurant.Find(parameters.id);
-        var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
-        var allCuisines = Cuisine.GetAll();
-        model.Add("cuisines", allCuisines);
-        model.Add("cuisine", foundCuisine);
-        model.Add("restaurant", updatedRestaurant);
-        return View["restaurant.cshtml", model];
-      };
-      Patch["restaurant/editcuisineid/{id}"] = parameters => {
-        Restaurant foundRestaurant = Restaurant.Find(parameters.id);
         foundRestaurant.UpdateCuisineId(Request.Form["restaurant-cuisineid"]);
+        foundRestaurant.UpdateFavDish(Request.Form["restaurant-fav-dish"]);
         Dictionary<string, object> model = new Dictionary<string, object>{};
         var updatedRestaurant = Restaurant.Find(parameters.id);
         var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
@@ -151,6 +130,30 @@ namespace Yelp
         model.Add("restaurant", updatedRestaurant);
         return View["restaurant.cshtml", model];
       };
+      // Patch["restaurant/editdate/{id}"] = parameters => {
+      //   Restaurant foundRestaurant = Restaurant.Find(parameters.id);
+      //   foundRestaurant.UpdateDate(Request.Form["restaurant-date"]);
+      //   Dictionary<string, object> model = new Dictionary<string, object>{};
+      //   var updatedRestaurant = Restaurant.Find(parameters.id);
+      //   var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
+      //   var allCuisines = Cuisine.GetAll();
+      //   model.Add("cuisines", allCuisines);
+      //   model.Add("cuisine", foundCuisine);
+      //   model.Add("restaurant", updatedRestaurant);
+      //   return View["restaurant.cshtml", model];
+      // };
+      // Patch["restaurant/editcuisineid/{id}"] = parameters => {
+      //   Restaurant foundRestaurant = Restaurant.Find(parameters.id);
+      //   foundRestaurant.UpdateCuisineId(Request.Form["restaurant-cuisineid"]);
+      //   Dictionary<string, object> model = new Dictionary<string, object>{};
+      //   var updatedRestaurant = Restaurant.Find(parameters.id);
+      //   var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
+      //   var allCuisines = Cuisine.GetAll();
+      //   model.Add("cuisines", allCuisines);
+      //   model.Add("cuisine", foundCuisine);
+      //   model.Add("restaurant", updatedRestaurant);
+      //   return View["restaurant.cshtml", model];
+      // };
     }
   }
 }

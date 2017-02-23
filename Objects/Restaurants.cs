@@ -237,6 +237,43 @@ namespace Yelp
       }
     }
 
+    public void UpdateFavDish(string newFavDish)
+    {
+      if (newFavDish != "")
+      {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE restaurants SET fav_dish = @NewFavDish OUTPUT INSERTED.fav_dish WHERE id=@RestaurantId;", conn);
+
+      SqlParameter newNameParameter = new SqlParameter();
+      newNameParameter.ParameterName = "@NewFavDish";
+      newNameParameter.Value = newFavDish;
+      cmd.Parameters.Add(newNameParameter);
+
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@RestaurantId";
+      restaurantIdParameter.Value= this.GetId();
+      cmd.Parameters.Add(restaurantIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._favDish = rdr.GetString(0);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      }
+    }
+
     public void UpdateDate(DateTime newDate)
     {
       DateTime defaultDate = new DateTime(1800,1,1);
