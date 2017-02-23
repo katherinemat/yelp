@@ -103,6 +103,16 @@ namespace Yelp
         model.Add("restaurantList", allRestaurants);
         return View["restaurants.cshtml", model];
       };
+      Patch["cuisine/edit/{id}"] = parameters => {
+        Cuisine foundCuisine = Cuisine.Find(parameters.id);
+        foundCuisine.Update(Request.Form["cuisine-name"]);
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        var updatedCuisine = Cuisine.Find(parameters.id);
+        var foundRestaurants = foundCuisine.GetRestaurant();
+        model.Add("cuisine",updatedCuisine);
+        model.Add("restaurants",foundRestaurants);
+        return View["cuisine.cshtml", model];
+      };
     }
   }
 }

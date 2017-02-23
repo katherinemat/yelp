@@ -28,6 +28,15 @@ else
   <button type="submit" name="button" class="btn btn-lg btn-info">Delete this Cuisine</button>
 </form>
 
+<h2>Edit cuisine: @Model["cuisine"].GetName()</h2>
+<form action="/cuisine/edit/@Model["cuisine"].GetId()" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+  <input name="cuisine-id" type="hidden" value="@Model["cuisine"].GetId()">
+  <label for="cuisine-name">Category name</label>
+  <input id="cuisine-name" name="cuisine-name" type="text">
+  <button type="submit" class="btn btn-lg btn-info">Submit</button>
+</form>
+
 
 <div class="row">
   <a href="/restaurants">See all restaurants</a><br>
