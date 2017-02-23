@@ -10,6 +10,13 @@
   <li>@Model["cuisine"].GetName()</li>
 </ul>
 
+<h3>Reviews for @Model["restaurant"].GetName():</h3>
+
+@foreach(var review in @Model["reviews"])
+{
+  <p>@review.GetRating(): @review.GetReview()</p>
+}
+
 <h2>Edit restaurant: @Model["restaurant"].GetName()</h2>
 <form action="/restaurant/edit/@Model["restaurant"].GetId()" method="post" id="update">
   <input type="hidden" name="_method" value="PATCH">
@@ -40,6 +47,20 @@
   </select>
 
   <button type="submit" class="btn btn-lg btn-info">Submit</button>
+</form>
+
+<h2>Add review for this restaurant: @Model["restaurant"].GetName()</h2>
+<form action="/restaurant/review/@Model["restaurant"].GetId()" method="post">
+
+  <input name="restaurant-id" type="hidden" value="@Model["restaurant"].GetId()">
+
+  <label for="review">What do you think of @Model["restaurant"].GetName():</label>
+  <input id="review" name="review" type="text">
+
+  <label for="rating">Rating:</label>
+  <input id="rating" name="rating" type="number">
+
+  <button type="submit" class="btn btn-lg btn-warning">Submit</button>
 </form>
 
 <form action="/restaurant/@Model["restaurant"].GetId()/deleted" method="post">

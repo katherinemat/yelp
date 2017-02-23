@@ -32,7 +32,7 @@ namespace Yelp
       };
       Post["/restaurants/new"] = _ =>{
         // Create new instance
-        string newName = Request.Form["name"].ToLower();
+        string newName = Request.Form["name"];
         string newFavDish = Request.Form["fav-dish"];
         DateTime newDate = Request.Form["start-date"];
         int newCuisineId = Request.Form["cuisine-id"];
@@ -61,9 +61,11 @@ namespace Yelp
         var foundRestaurant = Restaurant.Find(parameters.id);
         var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
         var allCuisines = Cuisine.GetAll();
+        var restaurantReviews = foundRestaurant.GetRestaurantReview();
         model.Add("cuisines", allCuisines);
-        model.Add("cuisine",foundCuisine);
-        model.Add("restaurant",foundRestaurant);
+        model.Add("cuisine", foundCuisine);
+        model.Add("restaurant", foundRestaurant);
+        model.Add("reviews", restaurantReviews);
         return View["restaurant.cshtml", model];
       };
       Delete["/cuisines/deleted"] = _ => {
@@ -125,15 +127,36 @@ namespace Yelp
         var updatedRestaurant = Restaurant.Find(parameters.id);
         var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
         var allCuisines = Cuisine.GetAll();
+        var restaurantReviews = foundRestaurant.GetRestaurantReview();
         model.Add("cuisines", allCuisines);
         model.Add("cuisine", foundCuisine);
         model.Add("restaurant", updatedRestaurant);
+        model.Add("reviews", restaurantReviews);
         return View["restaurant.cshtml", model];
       };
       Post["/cuisines/search"] = _ => {
         string searchTerm = Request.Form["search"];
         List<Cuisine> cuisineMatches = Cuisine.Search(searchTerm);
         return View["cuisine_search.cshtml", cuisineMatches];
+      };
+      Post["/restaurant/review/{id}"] = parameters => {
+        Restaurant foundRestaurant = Restaurant.Find(parameters.id);
+        string review = Request.Form["review"];
+        int rating = Request.Form["rating"];
+        int restaurantId = Request.Form["restaurantId"];
+        Review newReview = new Review(review, rating, restaurantId);
+        newReview.Save();
+
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        var restaurantReviews = foundRestaurant.GetRestaurantReview();
+        var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
+        var allCuisines = Cuisine.GetAll();
+        model.Add("reviews", restaurantReviews);
+        model.Add("restaurant", foundRestaurant);
+        model.Add("cuisine", foundCuisine);
+        model.Add("cuisines", allCuisines);
+
+        return View["restaurant.cshtml", model];
       };
     }
   }

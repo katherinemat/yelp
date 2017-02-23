@@ -78,6 +78,9 @@
 * Each restaurant displays its rating on all restaurant and cuisine pages
   * Input: all restaurants page
   * Output: "Wendys", "very good....would come again", 5 stars + "Burger King", "so freaking gross", 2 stars
+* Filter restaurants by minimum rating
+  * Input: 4
+  * Output: "Wendys", "Il Fustino", "Ruth's Steak House", "James Brioler"
 
 ## Known Bugs
 

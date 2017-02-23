@@ -64,6 +64,27 @@ namespace Yelp
       Assert.Equal(testId, result);
     }
 
+    [Fact]
+    public void GetRestaurantReview_OneRestaurant_ReviewsAboutRestaurants()
+    {
+      //Act
+      DateTime testDate = new DateTime(1999,6,4);
+      Restaurant testRestaurant = new Restaurant("Wendys","nuggets",testDate,1);
+      testRestaurant.Save();
+
+      Review testReview1 = new Review("great place", 5, testRestaurant.GetId());
+      testReview1.Save();
+      Review testReview2 = new Review("so so place", 3, testRestaurant.GetId());
+      testReview2.Save();
+
+      //Arrange
+      List<Review> output = testRestaurant.GetRestaurantReview();
+      List<Review> verify = new List<Review>{testReview1,testReview2};
+
+      //Act
+      Assert.Equal(output,verify);
+    }
+
     public void Dispose()
     {
       Review.DeleteAll();

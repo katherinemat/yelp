@@ -185,7 +185,7 @@ namespace Yelp
 
       SqlParameter idParameter = new SqlParameter();
       idParameter.ParameterName = "@CuisineId";
-      idParameter.Value = this.GetId();
+      idParameter.Value = this.GetId().ToString();
       cmd.Parameters.Add(idParameter);
       SqlDataReader rdr = cmd.ExecuteReader();
 

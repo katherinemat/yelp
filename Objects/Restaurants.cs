@@ -350,6 +350,44 @@ namespace Yelp
       }
     }
 
+    public List<Review> GetRestaurantReview()
+    {
+      List<Review> allReviews = new List<Review>{};
+
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM reviews WHERE restaurant_id = @RestaurantId;", conn);
+
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@RestaurantId";
+      restaurantIdParameter.Value = this.GetId().ToString();
+      cmd.Parameters.Add(restaurantIdParameter);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        int id = rdr.GetInt32(0);
+        string review = rdr.GetString(1);
+        int rating = rdr.GetInt32(2);
+        int restaurantId = rdr.GetInt32(3);
+        Review newReview = new Review(review, rating, restaurantId, id);
+        allReviews.Add(newReview);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+
+      return allReviews;
+    }
+
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
