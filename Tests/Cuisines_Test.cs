@@ -116,6 +116,25 @@ namespace Yelp
     }
 
     [Fact]
+    public void Search_CuisineNameCapitalization_CuisineMatch()
+    {
+      //Arrange
+      Cuisine firstCuisine = new Cuisine("western");
+      firstCuisine.Save();
+      Cuisine secondCuisine = new Cuisine("japonese");
+      secondCuisine.Save();
+
+      //Act
+      string searchTerm = "weSTern";
+      List<Cuisine> cuisineMatches = Cuisine.Search(searchTerm.ToLower());
+
+      List<Cuisine> expectedCuisines = new List<Cuisine>{firstCuisine};
+
+      //Assert
+      Assert.Equal(cuisineMatches, expectedCuisines);
+    }
+
+    [Fact]
     public void GetRestaurant_TwoRestaurantsSameClass_RetrievedRestaurants()
     {
       //Arrange
