@@ -21,10 +21,12 @@ else
 }
 
 <form action="/cuisine/@Model["cuisine"].GetId()/cleared" method="post">
+  <input type="hidden" name="_method" value="DELETE">
   <button type="submit" name="button" class="btn btn-lg btn-info">Delete All Restaurants in this Cuisine</button>
 </form>
 
 <form action="/cuisine/@Model["cuisine"].GetId()/deleted" method="post">
+  <input type="hidden" name="_method" value="DELETE">
   <button type="submit" name="button" class="btn btn-lg btn-info">Delete this Cuisine</button>
 </form>
 

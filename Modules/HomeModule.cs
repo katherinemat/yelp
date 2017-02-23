@@ -66,12 +66,12 @@ namespace Yelp
         model.Add("restaurant",foundRestaurant);
         return View["restaurant.cshtml", model];
       };
-      Post["/cuisines/deleted"] = _ => {
+      Delete["/cuisines/deleted"] = _ => {
         Cuisine.DeleteAll();
         List<Cuisine> allCuisines = Cuisine.GetAll();
         return View["cuisines.cshtml", allCuisines];
       };
-      Post["/restaurants/deleted"] = _ => {
+      Delete["/restaurants/deleted"] = _ => {
         Restaurant.DeleteAll();
         var allCuisines = Cuisine.GetAll();
         var allRestaurants = Restaurant.GetAll();
@@ -80,7 +80,7 @@ namespace Yelp
         model.Add("restaurantList", allRestaurants);
         return View["restaurants.cshtml", model];
       };
-      Post["/cuisine/{id}/cleared"] = parameters => {
+      Delete["/cuisine/{id}/cleared"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>{};
         var foundCuisine = Cuisine.Find(parameters.id);
         foundCuisine.DeleteRestaurantInCuisine();
@@ -89,13 +89,13 @@ namespace Yelp
         model.Add("restaurants",foundRestaurants);
         return View["cuisine.cshtml", model];
       };
-      Post["/cuisine/{id}/deleted"] = parameters => {
+      Delete["/cuisine/{id}/deleted"] = parameters => {
         Cuisine foundCuisine = Cuisine.Find(parameters.id);
         foundCuisine.DeleteThisCuisine();
         List<Cuisine> allCuisines = Cuisine.GetAll();
         return View["cuisines.cshtml", allCuisines];
       };
-      Post["/restaurant/{id}/deleted"] = parameters => {
+      Delete["/restaurant/{id}/deleted"] = parameters => {
         Restaurant foundRestaurant = Restaurant.Find(parameters.id);
         foundRestaurant.DeleteThisRestaurant();
         var allCuisines = Cuisine.GetAll();
@@ -130,30 +130,6 @@ namespace Yelp
         model.Add("restaurant", updatedRestaurant);
         return View["restaurant.cshtml", model];
       };
-      // Patch["restaurant/editdate/{id}"] = parameters => {
-      //   Restaurant foundRestaurant = Restaurant.Find(parameters.id);
-      //   foundRestaurant.UpdateDate(Request.Form["restaurant-date"]);
-      //   Dictionary<string, object> model = new Dictionary<string, object>{};
-      //   var updatedRestaurant = Restaurant.Find(parameters.id);
-      //   var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
-      //   var allCuisines = Cuisine.GetAll();
-      //   model.Add("cuisines", allCuisines);
-      //   model.Add("cuisine", foundCuisine);
-      //   model.Add("restaurant", updatedRestaurant);
-      //   return View["restaurant.cshtml", model];
-      // };
-      // Patch["restaurant/editcuisineid/{id}"] = parameters => {
-      //   Restaurant foundRestaurant = Restaurant.Find(parameters.id);
-      //   foundRestaurant.UpdateCuisineId(Request.Form["restaurant-cuisineid"]);
-      //   Dictionary<string, object> model = new Dictionary<string, object>{};
-      //   var updatedRestaurant = Restaurant.Find(parameters.id);
-      //   var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
-      //   var allCuisines = Cuisine.GetAll();
-      //   model.Add("cuisines", allCuisines);
-      //   model.Add("cuisine", foundCuisine);
-      //   model.Add("restaurant", updatedRestaurant);
-      //   return View["restaurant.cshtml", model];
-      // };
     }
   }
 }
