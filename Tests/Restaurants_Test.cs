@@ -101,7 +101,7 @@ namespace Yelp
     }
 
     [Fact]
-    public void Update_OneRestaurant_NewName()
+    public void UpdateName_OneRestaurant_NewName()
     {
       //Arrange
       DateTime testDate = new DateTime(2016,4,30);
@@ -109,11 +109,26 @@ namespace Yelp
       Restaurant testRestaurant = new Restaurant(originalName,"nuggets", testDate, 1);
       testRestaurant.Save();
       string newName = "PapaJohns";
-      testRestaurant.Update(newName);
+      testRestaurant.UpdateName(newName);
       //Act
       string outputName = testRestaurant.GetName();
       //Assert
       Assert.Equal(newName,outputName);
+    }
+
+    [Fact]
+    public void UpdateDate_OneRestaurant_NewDate()
+    {
+      //Arrange
+      DateTime testDate = new DateTime(2016,4,30);
+      Restaurant testRestaurant = new Restaurant("Wendys","nuggets", testDate, 1);
+      testRestaurant.Save();
+      DateTime newDate = new DateTime(2014,7,30);
+      testRestaurant.UpdateDate(newDate);
+      //Act
+      DateTime outputDate = testRestaurant.GetDate();
+      //Assert
+      Assert.Equal(newDate,outputDate);
     }
 
     public void Dispose()

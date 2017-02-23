@@ -200,7 +200,7 @@ namespace Yelp
       return foundRestaurant;
     }
 
-    public void Update(string newName)
+    public void UpdateName(string newName)
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
@@ -221,6 +221,40 @@ namespace Yelp
       while(rdr.Read())
       {
         this._name = rdr.GetString(0);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
+    public void UpdateDate(DateTime newDate)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE restaurants SET opening_date = @NewDate OUTPUT INSERTED.opening_date WHERE id=@RestaurantId;", conn);
+
+      SqlParameter newDateParameter = new SqlParameter();
+      newDateParameter.ParameterName = "@NewDate";
+      newDateParameter.Value= newDate;
+      cmd.Parameters.Add(newDateParameter);
+
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@RestaurantId";
+      restaurantIdParameter.Value= this.GetId();
+      cmd.Parameters.Add(restaurantIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._date = rdr.GetDateTime(0);
       }
 
       if (rdr != null)
