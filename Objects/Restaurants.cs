@@ -202,6 +202,8 @@ namespace Yelp
 
     public void UpdateName(string newName)
     {
+      if (newName != "")
+      {
       SqlConnection conn = DB.Connection();
       conn.Open();
 
@@ -232,39 +234,81 @@ namespace Yelp
       {
         conn.Close();
       }
+      }
     }
 
     public void UpdateDate(DateTime newDate)
     {
-      SqlConnection conn = DB.Connection();
-      conn.Open();
-
-      SqlCommand cmd = new SqlCommand("UPDATE restaurants SET opening_date = @NewDate OUTPUT INSERTED.opening_date WHERE id=@RestaurantId;", conn);
-
-      SqlParameter newDateParameter = new SqlParameter();
-      newDateParameter.ParameterName = "@NewDate";
-      newDateParameter.Value= newDate;
-      cmd.Parameters.Add(newDateParameter);
-
-      SqlParameter restaurantIdParameter = new SqlParameter();
-      restaurantIdParameter.ParameterName = "@RestaurantId";
-      restaurantIdParameter.Value= this.GetId();
-      cmd.Parameters.Add(restaurantIdParameter);
-      SqlDataReader rdr = cmd.ExecuteReader();
-
-      while(rdr.Read())
+      DateTime defaultDate = new DateTime(1800,1,1);
+      if (newDate != defaultDate)
       {
-        this._date = rdr.GetDateTime(0);
+        SqlConnection conn = DB.Connection();
+        conn.Open();
+
+        SqlCommand cmd = new SqlCommand("UPDATE restaurants SET opening_date = @NewDate OUTPUT INSERTED.opening_date WHERE id=@RestaurantId;", conn);
+
+        SqlParameter newDateParameter = new SqlParameter();
+        newDateParameter.ParameterName = "@NewDate";
+        newDateParameter.Value= newDate;
+        cmd.Parameters.Add(newDateParameter);
+
+        SqlParameter restaurantIdParameter = new SqlParameter();
+        restaurantIdParameter.ParameterName = "@RestaurantId";
+        restaurantIdParameter.Value= this.GetId();
+        cmd.Parameters.Add(restaurantIdParameter);
+        SqlDataReader rdr = cmd.ExecuteReader();
+
+        while(rdr.Read())
+        {
+          this._date = rdr.GetDateTime(0);
+        }
+
+        if (rdr != null)
+        {
+          rdr.Close();
+        }
+
+        if (conn != null)
+        {
+          conn.Close();
+        }
       }
+    }
 
-      if (rdr != null)
+    public void UpdateCuisineId(int newCuisineId)
+    {
+      if (newCuisineId != 0)
       {
-        rdr.Close();
-      }
+        SqlConnection conn = DB.Connection();
+        conn.Open();
 
-      if (conn != null)
-      {
-        conn.Close();
+        SqlCommand cmd = new SqlCommand("UPDATE restaurants SET cuisine_id = @NewCuisineId OUTPUT INSERTED.cuisine_id WHERE id=@RestaurantId;", conn);
+
+        SqlParameter newCuisineIdParameter = new SqlParameter();
+        newCuisineIdParameter.ParameterName = "@NewCuisineId";
+        newCuisineIdParameter.Value= newCuisineId.ToString();
+        cmd.Parameters.Add(newCuisineIdParameter);
+
+        SqlParameter restaurantIdParameter = new SqlParameter();
+        restaurantIdParameter.ParameterName = "@RestaurantId";
+        restaurantIdParameter.Value= this.GetId();
+        cmd.Parameters.Add(restaurantIdParameter);
+        SqlDataReader rdr = cmd.ExecuteReader();
+
+        while(rdr.Read())
+        {
+          this._cuisineId = rdr.GetInt32(0);
+        }
+
+        if (rdr != null)
+        {
+          rdr.Close();
+        }
+
+        if (conn != null)
+        {
+          conn.Close();
+        }
       }
     }
 

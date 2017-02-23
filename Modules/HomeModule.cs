@@ -60,6 +60,8 @@ namespace Yelp
         Dictionary<string, object> model = new Dictionary<string, object>{};
         var foundRestaurant = Restaurant.Find(parameters.id);
         var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
+        var allCuisines = Cuisine.GetAll();
+        model.Add("cuisines", allCuisines);
         model.Add("cuisine",foundCuisine);
         model.Add("restaurant",foundRestaurant);
         return View["restaurant.cshtml", model];
@@ -119,6 +121,8 @@ namespace Yelp
         Dictionary<string, object> model = new Dictionary<string, object>{};
         var updatedRestaurant = Restaurant.Find(parameters.id);
         var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
+        var allCuisines = Cuisine.GetAll();
+        model.Add("cuisines", allCuisines);
         model.Add("cuisine", foundCuisine);
         model.Add("restaurant", updatedRestaurant);
         return View["restaurant.cshtml", model];
@@ -129,6 +133,20 @@ namespace Yelp
         Dictionary<string, object> model = new Dictionary<string, object>{};
         var updatedRestaurant = Restaurant.Find(parameters.id);
         var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
+        var allCuisines = Cuisine.GetAll();
+        model.Add("cuisines", allCuisines);
+        model.Add("cuisine", foundCuisine);
+        model.Add("restaurant", updatedRestaurant);
+        return View["restaurant.cshtml", model];
+      };
+      Patch["restaurant/editcuisineid/{id}"] = parameters => {
+        Restaurant foundRestaurant = Restaurant.Find(parameters.id);
+        foundRestaurant.UpdateCuisineId(Request.Form["restaurant-cuisineid"]);
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        var updatedRestaurant = Restaurant.Find(parameters.id);
+        var foundCuisine = Cuisine.Find(foundRestaurant.GetCuisineId());
+        var allCuisines = Cuisine.GetAll();
+        model.Add("cuisines", allCuisines);
         model.Add("cuisine", foundCuisine);
         model.Add("restaurant", updatedRestaurant);
         return View["restaurant.cshtml", model];

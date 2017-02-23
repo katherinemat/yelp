@@ -131,6 +131,21 @@ namespace Yelp
       Assert.Equal(newDate,outputDate);
     }
 
+    [Fact]
+    public void UpdateCuisineId_OneRestaurant_NewCuisineId()
+    {
+      //Arrange
+      DateTime testDate = new DateTime(2016,4,30);
+      Restaurant testRestaurant = new Restaurant("Wendys","nuggets", testDate, 1);
+      testRestaurant.Save();
+      int newCuisineId = 2;
+      testRestaurant.UpdateCuisineId(newCuisineId);
+      //Act
+      int outputCuisineId = testRestaurant.GetCuisineId();
+      //Assert
+      Assert.Equal(newCuisineId, outputCuisineId);
+    }
+
     public void Dispose()
     {
       Restaurant.DeleteAll();

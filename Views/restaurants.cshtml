@@ -23,7 +23,7 @@
 <div class="panel panel-success">
   <div class="panel-heading">Add a new restaurant</div>
   <div class="panel-body">
-    <form action="/restaurants/new" method="post">
+    <form action="/restaurants/new" method="post" id="new-restaurant">
       <label for="name">Name:</label>
       <input type="text" name="name" id="name">
 
@@ -34,11 +34,12 @@
       <input type="text" name="fav-dish" id="fav-dish">
 
       <select name="cuisine-id">
-    @foreach (var cuisine in @Model["cuisineList"])
-    {
-      <option value="@cuisine.GetId()">@cuisine.GetName()</option>
-    }
-  </select>
+        <option value="0"></option>
+        @foreach (var cuisine in @Model["cuisineList"])
+        {
+          <option value="@cuisine.GetId()">@cuisine.GetName()</option>
+        }
+      </select>
   </div>
 </div>
 <button type="submit" name="button" class="btn btn-lg btn-info">Submit</button>

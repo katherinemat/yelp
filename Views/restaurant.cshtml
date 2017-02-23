@@ -20,11 +20,26 @@
 </form>
 
 <h2>Edit restaurant: @Model["restaurant"].GetDate().ToShortDateString()</h2>
-<form action="/restaurant/editdate/@Model["restaurant"].GetId()" method="post">
+<form action="/restaurant/editdate/@Model["restaurant"].GetId()" method="post" id="update">
   <input type="hidden" name="_method" value="PATCH">
   <input name="restaurant-id" type="hidden" value="@Model["restaurant"].GetId()">
   <label for="restaurant-date">New Date:</label>
   <input id="restaurant-date" name="restaurant-date" type="date">
+  <button type="submit" class="btn btn-lg btn-info">Submit</button>
+</form>
+
+<h2>Edit restaurant: @Model["restaurant"].GetCuisineId()</h2>
+<form action="/restaurant/editcuisineid/@Model["restaurant"].GetId()" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+  <input name="restaurant-id" type="hidden" value="@Model["restaurant"].GetId()">
+  <label for="restaurant-cuisineid">New Cuisine:</label>
+  <select name="restaurant-cuisineid">
+    <option value="0"></option>
+    @foreach (var cuisine in @Model["cuisines"])
+    {
+      <option value="@cuisine.GetId()">@cuisine.GetName()</option>
+    }
+  </select>
   <button type="submit" class="btn btn-lg btn-info">Submit</button>
 </form>
 
