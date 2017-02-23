@@ -54,6 +54,15 @@
 * When the user click on "Delete This Cuisine" in the individual cuisine page, the information of that particular cuisine in the database will be cleared  
   * Input: Select "Delete This Cuisine"
   * Output: Cuisine List
+* "Edit This Cuisine" button will allow user to change name of the individual cuisine  
+  * Input: Select "Edit This Cuisine", "Western" -> "Mexican"
+  * Output: "Mexican"
+* "Edit This Restaurant" button will allow user to change name of the individual restaurant  
+  * Input: Select "Edit This Restaurant", "Lonest" -> "Lone Star"
+  * Output: "Lone Star"
+* "Edit This Restaurant" button will allow user to change name, favDish, startDate, and cuisineId of the individual restaurant  
+  * Input: Select "Edit This Restaurant", "Lonest", "burger", 1994-12-12, "Western" -> "Lone Star", "steak"
+  * Output: "Lone Star", "steak", 1994-12-12, "Western"
 
 ## Known Bugs
 

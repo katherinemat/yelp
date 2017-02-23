@@ -100,6 +100,22 @@ namespace Yelp
       Assert.Equal(outputList,verifyList);
     }
 
+    [Fact]
+    public void Update_OneRestaurant_NewName()
+    {
+      //Arrange
+      DateTime testDate = new DateTime(2016,4,30);
+      string originalName = "Wendys";
+      Restaurant testRestaurant = new Restaurant(originalName,"nuggets", testDate, 1);
+      testRestaurant.Save();
+      string newName = "PapaJohns";
+      testRestaurant.Update(newName);
+      //Act
+      string outputName = testRestaurant.GetName();
+      //Assert
+      Assert.Equal(newName,outputName);
+    }
+
     public void Dispose()
     {
       Restaurant.DeleteAll();

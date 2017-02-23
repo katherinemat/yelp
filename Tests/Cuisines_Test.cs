@@ -141,6 +141,19 @@ namespace Yelp
       Assert.Equal(outputList, verifyList);
     }
 
+    [Fact]
+    public void Update_OneCuisine_NewCuisineName()
+    {
+      string original = "Wendys";
+      Cuisine newCuisine = new Cuisine(original);
+      newCuisine.Save();
+      string newString = "Burger King";
+      newCuisine.Update(newString);
+      string newCuisineName = newCuisine.GetName();
+
+      Assert.Equal(newString, newCuisineName);
+    }
+
     public void Dispose()
     {
       Cuisine.DeleteAll();
