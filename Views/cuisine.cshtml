@@ -33,7 +33,9 @@ else
 <h2>Edit cuisine: @Model["cuisine"].GetName()</h2>
 <form action="/cuisine/edit/@Model["cuisine"].GetId()" method="post">
   <input type="hidden" name="_method" value="PATCH">
+  @* Get id of the restaurant *@
   <input name="cuisine-id" type="hidden" value="@Model["cuisine"].GetId()">
+  @* Change Name of the restaurant *@
   <label for="cuisine-name">Name</label>
   <input id="cuisine-name" name="cuisine-name" type="text">
   <button type="submit" class="btn btn-lg btn-info">Submit</button>

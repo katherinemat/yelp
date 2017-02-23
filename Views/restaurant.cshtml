@@ -13,16 +13,23 @@
 <h2>Edit restaurant: @Model["restaurant"].GetName()</h2>
 <form action="/restaurant/edit/@Model["restaurant"].GetId()" method="post" id="update">
   <input type="hidden" name="_method" value="PATCH">
+
+  @* Getid of the restaurant *@
   <input name="restaurant-id" type="hidden" value="@Model["restaurant"].GetId()">
+
+  @* Change Name *@
   <label for="restaurant-name">New Name:</label>
   <input id="restaurant-name" name="restaurant-name" type="text">
 
+  @* Change Fav Dish *@
   <label for="restaurant-fav-dish">New Fav Dish:</label>
   <input id="restaurant-fav-dish" name="restaurant-fav-dish" type="text">
 
+  @* Change Date *@
   <label for="restaurant-date">New Date:</label>
   <input id="restaurant-date" name="restaurant-date" type="date">
 
+  @* Change Cuisine Group *@
   <label for="restaurant-cuisineid">New Cuisine:</label>
   <select name="restaurant-cuisineid">
     <option value="0"></option>

@@ -63,6 +63,12 @@
 * "Edit This Restaurant" button will allow user to change name, favDish, startDate, and cuisineId of the individual restaurant  
   * Input: Select "Edit This Restaurant", "Lonest", "burger", 1994-12-12, "Western" -> "Lone Star", "steak"
   * Output: "Lone Star", "steak", 1994-12-12, "Western"
+* Search for a cuisine type by exact name to view all the cuisine's restaurants
+  * Input: Search "Western"
+  * Output: "Lone Star", "Wendys", "Claim Jumper"
+* Search for a cuisine type by exact name, disregarding capitalization, to view all the cuisine's restaurants
+  * Input: Search "weSTern"
+  * Output: "Lone Star", "Wendys", "Claim Jumper"
 
 ## Known Bugs
 
