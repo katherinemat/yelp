@@ -1,0 +1,24 @@
+@{
+    Layout="Shared/_Layout.cshtml";
+}
+
+<div class="well">
+  <h2>Search result:</h2>
+  @if(@Model.Count== 0)
+  {
+    <h5> There is no match for your search</h5>
+  }
+  else
+  {
+    <ol>
+    @foreach (var cuisine in @Model)
+    {
+      <li><a href="/cuisines/@cuisine.GetId()"> @cuisine.GetName() </a></li>
+    }
+    </ol>
+  }
+</div>
+
+<a href="/">Home Page</a>
+<a href="/cuisines">See all cuisines</a>
+<a href="/restaurants">See all restaurants</a>

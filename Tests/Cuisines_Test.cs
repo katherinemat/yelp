@@ -89,7 +89,7 @@ namespace Yelp
       secondCuisine.Save();
 
       //Act
-      List<Cuisine> cuisineMatches = Cuisine.Search("western");
+      List<Cuisine> cuisineMatches = Cuisine.Search("weStern");
 
       List<Cuisine> expectedCuisines = new List<Cuisine>{firstCuisine};
 
@@ -125,8 +125,7 @@ namespace Yelp
       secondCuisine.Save();
 
       //Act
-      string searchTerm = "weSTern";
-      List<Cuisine> cuisineMatches = Cuisine.Search(searchTerm.ToLower());
+      List<Cuisine> cuisineMatches = Cuisine.Search("weSTern");
 
       List<Cuisine> expectedCuisines = new List<Cuisine>{firstCuisine};
 

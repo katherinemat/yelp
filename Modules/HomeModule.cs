@@ -32,7 +32,7 @@ namespace Yelp
       };
       Post["/restaurants/new"] = _ =>{
         // Create new instance
-        string newName = Request.Form["name"];
+        string newName = Request.Form["name"].ToLower();
         string newFavDish = Request.Form["fav-dish"];
         DateTime newDate = Request.Form["start-date"];
         int newCuisineId = Request.Form["cuisine-id"];
@@ -129,6 +129,11 @@ namespace Yelp
         model.Add("cuisine", foundCuisine);
         model.Add("restaurant", updatedRestaurant);
         return View["restaurant.cshtml", model];
+      };
+      Post["/cuisines/search"] = _ => {
+        string searchTerm = Request.Form["search"];
+        List<Cuisine> cuisineMatches = Cuisine.Search(searchTerm);
+        return View["cuisine_search.cshtml", cuisineMatches];
       };
     }
   }
