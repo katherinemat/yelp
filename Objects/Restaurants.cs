@@ -384,7 +384,6 @@ namespace Yelp
       {
         conn.Close();
       }
-
       return allReviews;
     }
 

@@ -1,0 +1,99 @@
+.header {
+  width: 100%;
+  height: 140px;
+}
+
+.logo {
+  height: 120px;
+  position: absolute;
+  left: 45%;
+  top: 10px;
+}
+
+.index-intro {
+  height: 500px;
+  width: 100%;
+  background-image: url(/Contents/img/background_index.jpeg);
+  background-size: 60%;
+  background-repeat: no-repeat;
+  text-overflow: none;
+}
+
+.intro-text {
+  width: 30%;
+  float: right;
+}
+
+.divider {
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.stylish-input-group .input-group-addon{
+    background: white !important;
+}
+.stylish-input-group .form-control{
+	border-right:0;
+	box-shadow:0 0 0;
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
+.space {
+  margin-bottom: 40px;
+}
+
+.index-links {
+  height: 300px;
+  background-color: yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.restaurants-background
+{
+  background-image: url(/Contents/img/restaurants.jpeg);
+}
+
+.restaurants-link {
+  display: table;
+  text-align: center;
+}
+
+#restaurants-link {
+  height: 150px;
+  width: 375px;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 45px;
+  line-height: normal;
+  background-color: rgba(255, 255, 255,0.5);
+  text-align: center;
+}
+
+.cuisines-background
+{
+  background-image: url(/Contents/img/cuisines_link.jpeg);
+}
+
+.cuisines-link {
+  display: table;
+  text-align: center;
+}
+
+#cuisines-link {
+  height: 150px;
+  width: 375px;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 45px;
+  line-height: normal;
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}

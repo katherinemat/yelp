@@ -1,29 +1,30 @@
-CREATE TABLE cuisines (
-  id int IDENTITY (1, 1) ,
-  name varchar(255)  ,
-)
-GO
-
-CREATE TABLE restaurants (
-  id int IDENTITY (1, 1) ,
-  name varchar(255) ,
-  fav_dish varchar(255) ,
-  opening_date datetime ,
-  cuisine_id int ,
-)
-GO
-
-
-- input their cuisine category
-- cusine select box, 5 options
-- restaurant name input field
-- submit button
-
 
 TODO
-__ add more specs
-__ add the pricerange thing, add one column in the cuisine
-__ add Review, add one column in restaurants
-__ Wireframing for Layout
+_x_ add more specs
+_V_ add the pricerange thing, add one column in the cuisine
+_x_ add Review, add one column in restaurants
+_x_ Wireframing for Layout
 __ JS effect
-__ Delete Category and Restaurant individually
+
+$(this).unbind('click').click();
+$('form').on('submit', function(event) {
+  event.preventDefault();
+
+  // code
+
+  event.currentTarget.submit();
+});
+$('a').click(function(evt){
+  evt.preventDefault();
+
+  // in async handler (ajax/timer) do these actions:
+  setTimeout(function(){
+    // override prevented flag to prevent jquery from discarding event
+    evt.isDefaultPrevented = function(){ return false; }
+    // retrigger with the exactly same event data
+    $(this).trigger(evt);
+  }, 1000);
+}
+
+_x_ Delete Category and Restaurant individually
+__ sort by average rating of restaurant

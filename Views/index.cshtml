@@ -1,16 +1,51 @@
 @{
     Layout="Shared/_Layout.cshtml";
 }
-<h1 class="jumbotron">Restaurant Bookmarks</h1>
 <div class="row">
-  <a href="/cuisines">See all cuisines</a>
+  <div class="col-md-12">
+    <div class="index-intro">
+      <div class="intro-text">
+        <h3>Restaurant Book</h3>
+        <div class="divider"></div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales iaculis arcu, consequat elementum tellus. In eu neque volutpat, ornare elit eu, molestie eros. Duis tempus bibendum nunc in sodales. In eget est massa. Curabitur tincidunt sit amet sem nec consectetur. Maecenas rhoncus ac felis ultricies facilisis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam tristique dapibus lorem, sed congue ipsum ultricies nec. Cras ac ullamcorper justo.
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="row">
-  <a href="/restaurants">See all restaurants</a>
+
+<div class="row space">
+  <div class="col-sm-6 col-sm-offset-3">
+    <form action="/cuisines/search" method="post" id="search">
+      <div id="imaginary_container">
+        <div class="input-group stylish-input-group">
+          <input type="text" name="search" id="search" class="form-control"  placeholder="Search" >
+          <span class="input-group-addon">
+            <button type="submit">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
+
 <div class="row">
-  <form action="/cuisines/search" method="post">
-    <label for="search">Search a cuisine in the database:</label>
-    <input type="text" name="search" id="search">
-  </form>
+
+    <div class="col-md-5 index-links restaurants-background">
+      <div class="restaurants-link">
+        <a href="/restaurants" id="restaurants-link">See all restaurants</a>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      </div>
+    <div class="col-md-5 index-links cuisines-background">
+      <div class="cuisines-link">
+        <a href="/cuisines" id="cuisines-link">See all cuisines</a>
+      </div>
+    </div>
+
 </div>
