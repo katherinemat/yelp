@@ -162,6 +162,23 @@ namespace Yelp
       Assert.Equal(newFavDish, outputFavDish);
     }
 
+    [Fact]
+    public void GetRestaurantMinReview_AllRestaurants_RestaurantsWithMinRating()
+    {
+      DateTime testDate = new DateTime(2016,4,30);
+      Restaurant firstRestaurant = new Restaurant("Wendys","nuggets",testDate,1);
+      firstRestaurant.Save();
+      Restaurant secondRestaurant = new Restaurant("McDonald","Big Mac",testDate,2);
+      secondRestaurant.Save();
+      Review firstReview = new Review("bad", 2, firstRestaurant.GetId());
+      Review secondReview = new Review("good", 4, secondRestaurant.GetId());
+
+      List<Restaurant> outputList = Restaurant.GetRestaurantMinReview();
+      List<Restaurant> testList = new List<Restaurant> {secondRestaurant};
+
+      Assert.Equal(outputList, testList);
+    }
+
 
     public void Dispose()
     {

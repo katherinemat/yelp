@@ -387,6 +387,62 @@ namespace Yelp
       return allReviews;
     }
 
+    // public static List<Restaurant> GetRestaurantMinReview()
+    // {
+    //   List<Restaurant> allRestaurants = new List<Restaurant>{};
+    //
+    //   SqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //
+    //   SqlCommand cmd = new SqlCommand("SELECT restaurant_id FROM reviews WHERE rating >= @Rating;", conn);
+    //
+    //   SqlParameter minRatingParameter = new SqlParameter();
+    //   minRatingParameter.ParameterName = "@Rating";
+    //   minRatingParameter.Value = "3";
+    //   cmd.Parameters.Add(minRatingParameter);
+    //
+    //   SqlDataReader rdr = cmd.ExecuteReader();
+    //
+    //   while(rdr.Read())
+    //   {
+    //     int id = rdr.GetInt32(0);
+    //
+    //     SqlCommand cmd2 = new SqlCommand("SELECT * FROM restaurants WHERE id = @RestaurantId;", conn);
+    //
+    //     SqlParameter restaurantIdParameter = new SqlParameter();
+    //     restaurantIdParameter.ParameterName = "@RestaurantId";
+    //     restaurantIdParameter.Value = id;
+    //     cmd.Parameters.Add(restaurantIdParameter);
+    //
+    //     SqlDataReader rdr2 = cmd.ExecuteReader();
+    //
+    //     while(rdr2.Read())
+    //     {
+    //       int restaurantId = rdr2.GetInt32(0);
+    //       string restaurantName = rdr2.GetString(1);
+    //       string favDish = rdr2.GetString(2);
+    //       DateTime openingDate = rdr2.GetDateTime(3);
+    //       int cuisineId = rdr2.GetInt32(4);
+    //       Restaurant newRestaurant = new Restaurant(restaurantName, favDish, openingDate, cuisineId, restaurantId);
+    //       allRestaurants.Add(newRestaurant);
+    //     }
+    //     if (rdr2 != null)
+    //     {
+    //       rdr2.Close();
+    //     }
+    //   }
+    //
+    //   if (rdr != null)
+    //   {
+    //     rdr.Close();
+    //   }
+    //   if (conn != null)
+    //   {
+    //     conn.Close();
+    //   }
+    //   return allRestaurants;
+    // }
+
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
